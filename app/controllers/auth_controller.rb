@@ -1,9 +1,9 @@
 class AuthController < ApplicationController
   def signup
     user = User.new(signup_params)
-    token = JWT.encode({ user_id: user.id }, Rails.application.credentials.secret_key_base)
 
     if user.save
+      token = JWT.encode({ user_id: user.id }, Rails.application.credentials.secret_key_base)
       render json: {
         user: UserSerializer.new(user),
         token: token
